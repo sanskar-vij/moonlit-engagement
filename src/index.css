@@ -1,0 +1,1189 @@
+@import "tailwindcss";
+
+@theme {
+  --font-script: "Pinyon Script", "Brush Script MT", cursive;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --color-gold: #ecd5a3;
+  --color-gold-deep: #c9a96a;
+  --color-navy: #0a1633;
+}
+
+html,
+body {
+  background: #081330;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, #15265a 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, #0f1f4d 0%, transparent 60%),
+    #0a1633;
+  min-height: 100svh;
+}
+
+.gold-text {
+  color: #ecd5a3;
+  text-shadow:
+    0 0 12px rgba(236, 213, 163, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes goldShine {
+
+  0%,
+  45% {
+    background-position: 0% center;
+  }
+
+  75%,
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-script {
+  background: linear-gradient(110deg,
+      #d8b263 0%,
+      #ecd39c 25%,
+      #ffffff 45%,
+      #fffbe8 55%,
+      #ecd39c 75%,
+      #d8b263 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: goldShine 7s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(236, 213, 163, 0.4)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8));
+  will-change: background-position;
+}
+
+/* Romantic gentle heartbeat animation */
+@keyframes heartPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.18);
+  }
+
+  28% {
+    transform: scale(1.04);
+  }
+
+  42% {
+    transform: scale(1.22);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+
+.heart-pulse {
+  animation: heartPulse 3.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+  display: inline-block;
+}
+
+/* Diamond engagement ring rotating sparkle flare */
+@keyframes diamondGlint {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.6) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.35) rotate(90deg);
+  }
+}
+
+.diamond-glint {
+  animation: diamondGlint 3.2s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Sheen sweep for buttons and plaques */
+@keyframes sheenSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+
+  35%,
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.sheen-sweep {
+  animation: sheenSweep 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Floating golden firefly embers rising gently */
+@keyframes fireflyRise {
+  0% {
+    transform: translate3d(0, 105vh, 0) scale(0.6);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translate3d(24px, 52vh, 0) scale(1.1);
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translate3d(-18px, -20px, 0) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.firefly-drift {
+  animation: fireflyRise 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Enhanced Night Sky Star Blinking Animations (GPU Compositor Accelerated) */
+@keyframes starBlink {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.65);
+  }
+
+  30% {
+    opacity: 0.95;
+    transform: scale(1.35);
+  }
+
+  50% {
+    opacity: 0.25;
+    transform: scale(0.75);
+  }
+
+  75% {
+    opacity: 1;
+    transform: scale(1.45);
+  }
+}
+
+.star-blink {
+  animation: starBlink 2.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes starShimmer {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+.star-shimmer {
+  animation: starShimmer 3.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes starFlare {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.5) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.3) rotate(90deg);
+  }
+}
+
+.star-flare {
+  animation: starFlare 4.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Shooting star / meteor streak */
+@keyframes shootingStar {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-35deg) scaleX(0);
+    opacity: 0;
+  }
+
+  2% {
+    opacity: 1;
+    transform: translate3d(-20px, 14px, 0) rotate(-35deg) scaleX(1);
+  }
+
+  6% {
+    transform: translate3d(-180px, 120px, 0) rotate(-35deg) scaleX(1.3);
+    opacity: 0.9;
+  }
+
+  10% {
+    transform: translate3d(-320px, 210px, 0) rotate(-35deg) scaleX(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(-320px, 210px, 0) rotate(-35deg) scaleX(0);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 235, 170, 0.7), transparent);
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(255, 235, 170, 0.9));
+  animation: shootingStar 13s ease-in-out infinite;
+}
+
+@keyframes flicker {
+
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  40% {
+    opacity: 0.85;
+  }
+
+  60% {
+    opacity: 0.65;
+  }
+
+  80% {
+    opacity: 0.9;
+  }
+}
+
+.flicker {
+  animation: flicker 2.6s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal>* {
+  opacity: 0;
+}
+
+.reveal.in>* {
+  animation: fadeUp 1s ease-out forwards;
+}
+
+.reveal.in>*:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.reveal.in>*:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.reveal.in>*:nth-child(4) {
+  animation-delay: 0.36s;
+}
+
+.reveal.in>*:nth-child(5) {
+  animation-delay: 0.48s;
+}
+
+.reveal.in>*:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.reveal.in>*:nth-child(7) {
+  animation-delay: 0.72s;
+}
+
+.reveal.in>*:nth-child(8) {
+  animation-delay: 0.84s;
+}
+
+.reveal.in>*:nth-child(9) {
+  animation-delay: 0.96s;
+}
+
+.reveal.in>*:nth-child(10) {
+  animation-delay: 1.08s;
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.slow-zoom {
+  animation: slowZoom 8s ease-out forwards;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-in {
+  animation: modalIn 0.4s ease-out;
+}
+
+@keyframes pingSlow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.28);
+    opacity: 0.28;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.ping-slow {
+  animation: pingSlow 3.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+.shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes floatDrift {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+.float-drift {
+  animation: floatDrift 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 25px rgba(236, 213, 163, 0.25), inset 0 0 15px rgba(236, 213, 163, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 45px rgba(236, 213, 163, 0.55), inset 0 0 25px rgba(236, 213, 163, 0.4);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.8s ease-in-out infinite;
+}
+
+/* Blossom Petal Shower Animations (Hardware Accelerated 2D Transitions) */
+@keyframes petalDriftLeft {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.85;
+  }
+
+  30% {
+    transform: translate3d(28px, 30vh, 0) rotate(80deg) scale(1);
+  }
+
+  60% {
+    transform: translate3d(-20px, 65vh, 0) rotate(200deg) scale(0.95);
+  }
+
+  88% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translate3d(20px, 108vh, 0) rotate(360deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes petalDriftRight {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.75);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.88;
+  }
+
+  35% {
+    transform: translate3d(-30px, 35vh, 0) rotate(-90deg) scale(1);
+  }
+
+  65% {
+    transform: translate3d(22px, 70vh, 0) rotate(-220deg) scale(0.9);
+  }
+
+  88% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translate3d(-15px, 108vh, 0) rotate(-360deg) scale(0.75);
+    opacity: 0;
+  }
+}
+
+@keyframes petalDriftFloat {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.85);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translate3d(35px, 50vh, 0) rotate(160deg) scale(1.05);
+  }
+
+  88% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translate3d(-20px, 108vh, 0) rotate(340deg) scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* Lantern Candle Flame & Ambient Glow (Soothing, Steady, Smooth Warm Light) */
+.lantern-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+  background: radial-gradient(circle at 50% 50%,
+      rgba(255, 255, 245, 1) 0%,
+      rgba(255, 225, 120, 0.95) 24%,
+      rgba(255, 175, 60, 0.7) 50%,
+      rgba(255, 135, 25, 0.25) 75%,
+      transparent 100%);
+  animation: lanternSmoothFlicker 5.2s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.lantern-halo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+  background: radial-gradient(circle,
+      rgba(255, 220, 110, 0.45) 0%,
+      rgba(255, 175, 60, 0.22) 45%,
+      transparent 70%);
+  animation: lanternSmoothAura 6s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes lanternSmoothFlicker {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0.96);
+    opacity: 0.88;
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(0.98);
+    opacity: 0.92;
+  }
+}
+
+@keyframes lanternSmoothAura {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0.93);
+    opacity: 0.58;
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.08);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(0.96);
+    opacity: 0.65;
+  }
+}
+
+/* ================= EVENT, FLOWER & LAMP ANIMATIONS ================= */
+@keyframes sailboatBobbing {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(1.5px, -2.5px, 0) rotate(1deg);
+  }
+  70% {
+    transform: translate3d(-1px, 1.5px, 0) rotate(-0.8deg);
+  }
+}
+
+.sailboat-bob {
+  animation: sailboatBobbing 5s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+@keyframes clockTick {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(8deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(0deg) scale(1);
+  }
+  75% {
+    transform: rotate(-8deg) scale(1.1);
+  }
+}
+
+.clock-tick {
+  animation: clockTick 3.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+  display: inline-block;
+}
+
+@keyframes calendarPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px rgba(236, 213, 163, 0.4));
+  }
+  50% {
+    transform: scale(1.14);
+    filter: drop-shadow(0 0 10px rgba(236, 213, 163, 0.9));
+  }
+}
+
+.calendar-pulse {
+  animation: calendarPulse 3s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, filter;
+  display: inline-block;
+}
+
+@keyframes pinBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-5px);
+  }
+  55% {
+    transform: translateY(1.5px);
+  }
+}
+
+.pin-bounce {
+  animation: pinBounce 2.5s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+  display: inline-block;
+}
+
+@keyframes badgeGlow {
+  0%, 100% {
+    border-color: rgba(227, 199, 143, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(236, 213, 163, 0.05);
+  }
+  50% {
+    border-color: rgba(236, 213, 163, 0.8);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), inset 0 0 14px rgba(236, 213, 163, 0.15), 0 0 12px rgba(236, 213, 163, 0.25);
+  }
+}
+
+.event-badge-glow {
+  animation: badgeGlow 4s ease-in-out infinite;
+}
+
+@keyframes waterGlimmer {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scaleX(1.08);
+  }
+}
+
+.water-glimmer {
+  animation: waterGlimmer 3.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* ----------------- FLOWER ANIMATIONS ----------------- */
+@keyframes branchSwayLeft {
+  0%, 100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  35% {
+    transform: rotate(1.6deg) translate3d(1px, 2px, 0);
+  }
+  70% {
+    transform: rotate(-0.8deg) translate3d(-0.5px, 0.5px, 0);
+  }
+}
+
+.flower-sway-left {
+  animation: branchSwayLeft 7.5s ease-in-out infinite;
+  transform-origin: 0% 0%;
+  will-change: transform;
+}
+
+@keyframes branchSwayRight {
+  0%, 100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  35% {
+    transform: rotate(-1.4deg) translate3d(-1px, 2px, 0);
+  }
+  70% {
+    transform: rotate(0.8deg) translate3d(0.5px, 0.5px, 0);
+  }
+}
+
+.flower-sway-right {
+  animation: branchSwayRight 8.5s ease-in-out infinite;
+  transform-origin: 100% 0%;
+  will-change: transform;
+}
+
+@keyframes terraceBushRustle {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  40% {
+    transform: scale(1.008, 1.004) translate3d(0.8px, -0.6px, 0);
+  }
+  75% {
+    transform: scale(0.996, 1) translate3d(-0.5px, 0.4px, 0);
+  }
+}
+
+.terrace-rustle {
+  animation: terraceBushRustle 6.5s ease-in-out infinite;
+  transform-origin: 0% 100%;
+  will-change: transform;
+}
+
+/* ----------------- LAMP & LANTERN ANIMATIONS ----------------- */
+@keyframes lanternSwayLeft {
+  0%, 100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+.lantern-sway-left {
+  animation: lanternSwayLeft 6s ease-in-out infinite alternate;
+  transform-origin: 15% 0%;
+  will-change: transform;
+}
+
+@keyframes lanternSwayRight {
+  0%, 100% {
+    transform: rotate(1.3deg);
+  }
+  50% {
+    transform: rotate(-1.3deg);
+  }
+}
+
+.lantern-sway-right {
+  animation: lanternSwayRight 6.5s ease-in-out infinite alternate;
+  transform-origin: 80% 0%;
+  will-change: transform;
+}
+
+@keyframes stoneLanternLight {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translate3d(-50%, -50%, 0) scale(0.92);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate3d(-50%, -50%, 0) scale(1.08);
+  }
+  60% {
+    opacity: 0.75;
+    transform: translate3d(-50%, -50%, 0) scale(0.97);
+  }
+  85% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1.06);
+  }
+}
+
+.stone-lantern-light {
+  animation: stoneLanternLight 2.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+
+/* ================= EVENT, FLOWER & LAMP ANIMATIONS ================= */
+@keyframes sailboatBobbing {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(1.5px, -2.5px, 0) rotate(1deg);
+  }
+  70% {
+    transform: translate3d(-1px, 1.5px, 0) rotate(-0.8deg);
+  }
+}
+
+.sailboat-bob {
+  animation: sailboatBobbing 5s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+@keyframes clockTick {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(8deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(0deg) scale(1);
+  }
+  75% {
+    transform: rotate(-8deg) scale(1.1);
+  }
+}
+
+.clock-tick {
+  animation: clockTick 3.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+  display: inline-block;
+}
+
+@keyframes calendarPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px rgba(236, 213, 163, 0.4));
+  }
+  50% {
+    transform: scale(1.14);
+    filter: drop-shadow(0 0 10px rgba(236, 213, 163, 0.9));
+  }
+}
+
+.calendar-pulse {
+  animation: calendarPulse 3s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, filter;
+  display: inline-block;
+}
+
+@keyframes pinBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-5px);
+  }
+  55% {
+    transform: translateY(1.5px);
+  }
+}
+
+.pin-bounce {
+  animation: pinBounce 2.5s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+  display: inline-block;
+}
+
+@keyframes badgeGlow {
+  0%, 100% {
+    border-color: rgba(227, 199, 143, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(236, 213, 163, 0.05);
+  }
+  50% {
+    border-color: rgba(236, 213, 163, 0.8);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), inset 0 0 14px rgba(236, 213, 163, 0.15), 0 0 12px rgba(236, 213, 163, 0.25);
+  }
+}
+
+.event-badge-glow {
+  animation: badgeGlow 4s ease-in-out infinite;
+}
+
+@keyframes waterGlimmer {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scaleX(1.08);
+  }
+}
+
+.water-glimmer {
+  animation: waterGlimmer 3.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* ----------------- FLOWER ANIMATIONS ----------------- */
+@keyframes branchSwayLeft {
+  0%, 100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  35% {
+    transform: rotate(1.6deg) translate3d(1px, 2px, 0);
+  }
+  70% {
+    transform: rotate(-0.8deg) translate3d(-0.5px, 0.5px, 0);
+  }
+}
+
+.flower-sway-left {
+  animation: branchSwayLeft 7.5s ease-in-out infinite;
+  transform-origin: 0% 0%;
+  will-change: transform;
+}
+
+@keyframes branchSwayRight {
+  0%, 100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  35% {
+    transform: rotate(-1.4deg) translate3d(-1px, 2px, 0);
+  }
+  70% {
+    transform: rotate(0.8deg) translate3d(0.5px, 0.5px, 0);
+  }
+}
+
+.flower-sway-right {
+  animation: branchSwayRight 8.5s ease-in-out infinite;
+  transform-origin: 100% 0%;
+  will-change: transform;
+}
+
+@keyframes terraceBushRustle {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  40% {
+    transform: scale(1.008, 1.004) translate3d(0.8px, -0.6px, 0);
+  }
+  75% {
+    transform: scale(0.996, 1) translate3d(-0.5px, 0.4px, 0);
+  }
+}
+
+.terrace-rustle {
+  animation: terraceBushRustle 6.5s ease-in-out infinite;
+  transform-origin: 0% 100%;
+  will-change: transform;
+}
+
+/* ----------------- CANOPY SWAY (Synchronized Hanging Lanterns + Branches) ----------------- */
+@keyframes canopySwayLeft {
+  0%, 100% {
+    transform: rotate(-1.2deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+
+.canopy-sway-left {
+  animation: canopySwayLeft 6s ease-in-out infinite alternate;
+  transform-origin: 0% 0%;
+  will-change: transform;
+}
+
+/* ================= SMOOTH SOOTHING LUNAR LIGHT ANIMATIONS (Subtly Dimmed & Elegant) ================= */
+@keyframes smoothLunarAura {
+  0%, 100% {
+    transform: scale(0.97);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.75;
+  }
+}
+
+.smooth-lunar-aura {
+  animation: smoothLunarAura 5.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes smoothOrbitRing {
+  0%, 100% {
+    transform: scale(0.98);
+    opacity: 0.18;
+  }
+  50% {
+    transform: scale(1.025);
+    opacity: 0.38;
+  }
+}
+
+.smooth-orbit-ring {
+  animation: smoothOrbitRing 5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes lunarBreathe {
+  0%, 100% {
+    transform: translate3d(-50%, -50%, 0) scale(0.97);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.03);
+    opacity: 0.72;
+  }
+}
+
+.lunar-breathe {
+  animation: lunarBreathe 5.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Concentric Lunar Back Glow (Centered directly behind moon - Soft & Dimmed) */
+.lunar-halo-back {
+  position: absolute;
+  inset: -32%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 248, 200, 0.45) 0%,
+    rgba(253, 224, 71, 0.22) 35%,
+    rgba(253, 224, 71, 0.06) 65%,
+    transparent 78%
+  );
+  filter: blur(10px);
+}
+
+@keyframes moonShimmer {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(255, 230, 160, 0.35)) drop-shadow(0 0 14px rgba(255, 205, 110, 0.18));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 245, 190, 0.48)) drop-shadow(0 0 22px rgba(255, 215, 120, 0.28)) brightness(1.02);
+    transform: scale(1.01);
+  }
+}
+
+.moon-shimmer {
+  animation: moonShimmer 6s ease-in-out infinite;
+  will-change: filter, transform;
+}
+
+/* ================= COUPLE GLOW OUTLINE & HARDWARE ACCELERATION ================= */
+@keyframes coupleOutlineBreathe {
+  0%, 100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.couple-outline-glow {
+  animation: coupleOutlineBreathe 3s ease-in-out infinite;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+/* Couple Border Glow Modes (Tapped Separately) */
+.couple-mode-gold {
+  filter: drop-shadow(0 0 3px rgba(255, 220, 110, 0.9)) drop-shadow(0 0 10px rgba(255, 180, 50, 0.65));
+}
+.couple-outline-gold {
+  filter: none;
+}
+
+.couple-mode-rose {
+  filter: drop-shadow(0 0 3px rgba(255, 150, 190, 0.95)) drop-shadow(0 0 12px rgba(255, 90, 150, 0.8)) drop-shadow(0 0 20px rgba(255, 40, 120, 0.45));
+}
+.couple-outline-rose {
+  filter: hue-rotate(-50deg) saturate(2.2) brightness(1.15);
+}
+
+.couple-mode-diamond {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 1)) drop-shadow(0 0 14px rgba(240, 245, 255, 0.95)) drop-shadow(0 0 26px rgba(200, 225, 255, 0.7));
+}
+.couple-outline-diamond {
+  filter: saturate(0.2) brightness(1.6);
+}
+
+.couple-mode-sunset {
+  filter: drop-shadow(0 0 3px rgba(255, 130, 40, 0.95)) drop-shadow(0 0 12px rgba(255, 90, 20, 0.85)) drop-shadow(0 0 22px rgba(230, 60, 0, 0.55));
+}
+.couple-outline-sunset {
+  filter: hue-rotate(28deg) saturate(2.5) brightness(1.1);
+}
+
+.couple-mode-emerald {
+  filter: drop-shadow(0 0 3px rgba(100, 255, 210, 0.95)) drop-shadow(0 0 14px rgba(40, 220, 160, 0.85)) drop-shadow(0 0 24px rgba(20, 180, 130, 0.5));
+}
+.couple-outline-emerald {
+  filter: hue-rotate(95deg) saturate(2.4) brightness(1.2);
+}
+
+/* ================= LAMP / LANTERN GLOW MODES (Tapped Separately) ================= */
+.lamp-mode-candle {
+  filter: none;
+}
+
+.lamp-mode-radiant {
+  filter: drop-shadow(0 0 14px rgba(255, 220, 90, 0.9)) drop-shadow(0 0 28px rgba(255, 180, 50, 0.6));
+}
+
+.lamp-mode-sparkle {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 230, 140, 0.85)) hue-rotate(-12deg);
+}
+
+.lamp-mode-amber {
+  filter: drop-shadow(0 0 12px rgba(255, 130, 30, 0.95)) drop-shadow(0 0 24px rgba(255, 80, 10, 0.65)) hue-rotate(25deg);
+}
+
+/* ================= CELESTIAL DRAG SLIDER ANIMATIONS ================= */
+@keyframes stardustPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateX(4px);
+  }
+}
+
+.stardust-pulse {
+  animation: stardustPulse 2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes celestialBurst {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.celestial-burst {
+  animation: celestialBurst 0.8s ease-out forwards;
+  will-change: transform, opacity;
+}
