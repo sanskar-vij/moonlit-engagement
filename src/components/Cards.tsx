@@ -163,19 +163,19 @@ export function CoverCard() {
 
       {/* Layer 3: Hanging Lanterns with Animated Candle Flames & Unified Natural Canopy Sway */}
       <div className="canopy-sway-left pointer-events-none absolute inset-0 z-[3]" aria-hidden="true">
-        {/* Lantern 1 Glow & Halo (Upper Lantern flame centroid: 15.4%, 20.5%) */}
-        <span className="lantern-halo left-[15.4%] top-[20.5%] h-[12cqw] w-[12cqw] [animation-delay:0.3s]" />
-        <span className="lantern-glow left-[15.4%] top-[20.5%] h-[5.5cqw] w-[4.8cqw] [animation-delay:0.3s]" />
+        {/* Lantern 1 Glow & Halo (Upper Lantern flame centroid: 15.3%, 20.6%) */}
+        <span className="lantern-halo left-[15.3%] top-[20.6%] h-[11cqw] w-[11cqw] [animation-delay:0.3s]" />
+        <span className="lantern-glow left-[15.3%] top-[20.6%] h-[5cqw] w-[4.5cqw] [animation-delay:0.3s]" />
 
-        {/* Lantern 2 Glow & Halo (Lower Lantern flame centroid: 5.0%, 30.2%) */}
-        <span className="lantern-halo left-[5.0%] top-[30.2%] h-[12cqw] w-[12cqw] [animation-delay:1.1s]" />
-        <span className="lantern-glow left-[5.0%] top-[30.2%] h-[5.5cqw] w-[4.8cqw] [animation-delay:1.1s]" />
+        {/* Lantern 2 Glow & Halo (Lower Lantern flame centroid: 5.0%, 29.4%) */}
+        <span className="lantern-halo left-[5.0%] top-[29.4%] h-[10cqw] w-[10cqw] [animation-delay:1.1s]" />
+        <span className="lantern-glow left-[5.0%] top-[29.4%] h-[4.5cqw] w-[4cqw] [animation-delay:1.1s]" />
 
-        {/* Hanging Lanterns Layer */}
+        {/* Hanging Lanterns Layer with Warm Light Glow */}
         <img
           src={coverLanterns}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover transform-gpu"
+          className="absolute inset-0 h-full w-full object-cover transform-gpu lamp-light-glow"
         />
 
         {/* Cherry Blossom Floral Branch Layer (Swinging in 100% lockstep with lanterns) */}
@@ -445,21 +445,21 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
       {/* Layer 2: 3 Hanging Lanterns with Synchronized Candle Flame Glows & Night Breeze Sway */}
       <div className="lantern-sway-right pointer-events-none absolute inset-0 z-[3]" aria-hidden="true">
         {/* Lantern 1 (left) */}
-        <span className="lantern-halo left-[68.6%] top-[11.4%] h-[13cqw] w-[13cqw] [animation-delay:0.4s]" />
-        <span className="lantern-glow left-[68.6%] top-[11.4%] h-[6cqw] w-[5cqw] [animation-delay:0.4s]" />
+        <span className="lantern-halo left-[68.6%] top-[11.3%] h-[12cqw] w-[12cqw] [animation-delay:0.4s]" />
+        <span className="lantern-glow left-[68.6%] top-[11.3%] h-[5.5cqw] w-[4.5cqw] [animation-delay:0.4s]" />
 
         {/* Lantern 2 (middle) */}
-        <span className="lantern-halo left-[79.2%] top-[15.4%] h-[14cqw] w-[14cqw] [animation-delay:1.3s]" />
-        <span className="lantern-glow left-[79.2%] top-[15.4%] h-[7cqw] w-[5.8cqw] [animation-delay:1.3s]" />
+        <span className="lantern-halo left-[79.2%] top-[15.3%] h-[13cqw] w-[13cqw] [animation-delay:1.3s]" />
+        <span className="lantern-glow left-[79.2%] top-[15.3%] h-[6.5cqw] w-[5.5cqw] [animation-delay:1.3s]" />
 
         {/* Lantern 3 (closest right) */}
-        <span className="lantern-halo left-[90.5%] top-[18.4%] h-[17cqw] w-[17cqw] [animation-delay:0.8s]" />
-        <span className="lantern-glow left-[90.5%] top-[18.4%] h-[8.5cqw] w-[7cqw] [animation-delay:0.8s]" />
+        <span className="lantern-halo left-[90.5%] top-[18.4%] h-[15cqw] w-[15cqw] [animation-delay:0.8s]" />
+        <span className="lantern-glow left-[90.5%] top-[18.4%] h-[8cqw] w-[6.5cqw] [animation-delay:0.8s]" />
 
         <img
           src={page3Lanterns}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover lamp-light-glow"
         />
       </div>
 
@@ -483,14 +483,14 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
 
       {/* Layer 5: Stone Lantern with Living Firelight Flame & Ambient Step Illumination */}
       <div className="pointer-events-none absolute inset-0 z-[6]" aria-hidden="true">
-        <span className="stone-lantern-light left-[14.8%] top-[83.8%] h-[24cqw] w-[24cqw] rounded-full bg-gradient-to-r from-[#ffaa33]/25 via-[#ffcc55]/35 to-transparent blur-md" />
-        <span className="lantern-halo left-[14.8%] top-[83.8%] h-[18cqw] w-[18cqw] [animation-delay:0.5s]" />
-        <span className="stone-flame left-[14.8%] top-[83.8%] h-[8.5cqw] w-[7cqw] rounded-full bg-gradient-to-t from-[#ff8c1a] via-[#ffeaad] to-[#ffffff] blur-[2px] shadow-[0_0_15px_rgba(255,200,80,0.9)]" />
+        <span className="stone-lantern-light left-[16.8%] top-[83.9%] h-[24cqw] w-[24cqw] rounded-full bg-gradient-to-r from-[#ffaa33]/25 via-[#ffcc55]/35 to-transparent blur-md" />
+        <span className="lantern-halo left-[16.8%] top-[83.9%] h-[18cqw] w-[18cqw] [animation-delay:0.5s]" />
+        <span className="stone-flame left-[16.8%] top-[83.9%] h-[8.5cqw] w-[7cqw] rounded-full bg-gradient-to-t from-[#ff8c1a] via-[#ffeaad] to-[#ffffff] blur-[2px] shadow-[0_0_15px_rgba(255,200,80,0.9)]" />
       </div>
       <img
         src={page3StoneLantern}
         alt=""
-        className="pointer-events-none absolute inset-0 z-[7] h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 z-[7] h-full w-full object-cover lamp-light-glow"
       />
 
       {/* Gentle vignette for legibility */}
