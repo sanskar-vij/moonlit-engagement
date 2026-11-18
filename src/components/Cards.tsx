@@ -51,22 +51,22 @@ function useReveal<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-/* ---------- Celestial Arc Path for Draggable Moon ---------- */
-// Mathematical equation: y = 5.0 + 5.5 * ((x - 50) / 35)^2
-// Zenith (peak) at center (x = 50%, y = 5.0%), horizons at x = 15% & 85% (y = 10.5%)
-const getCelestialArcY = (x: number) => {
-  const u = (x - 50) / 35;
-  return 5.0 + 5.5 * (u * u);
+/* ---------- Moon Path Fixed to the Curve in User Image ---------- */
+// Exactly matches the red curve drawn by the user from top center (52.1%, 12.3%)
+// swooping down along the open night sky to the right horizon (96.0%, 40.1%)
+const getMoonArcY = (x: number) => {
+  const u = x - 52.1;
+  return 12.3 + 0.0144 * (u * u);
 };
 
-const getCelestialArcPoint = (rawX: number, rawY: number) => {
-  const clampedX = Math.max(15, Math.min(85, rawX));
+const getMoonArcPoint = (rawX: number, rawY: number) => {
+  const clampedX = Math.max(50, Math.min(96, rawX));
   let bestX = clampedX;
   let bestDist = Infinity;
-  const minSearch = Math.max(15, clampedX - 8);
-  const maxSearch = Math.min(85, clampedX + 8);
-  for (let x = minSearch; x <= maxSearch; x += 0.25) {
-    const y = getCelestialArcY(x);
+  const minSearch = Math.max(50, clampedX - 10);
+  const maxSearch = Math.min(96, clampedX + 10);
+  for (let x = minSearch; x <= maxSearch; x += 0.2) {
+    const y = getMoonArcY(x);
     const dx = x - rawX;
     // 16/9 aspect ratio correction for Euclidean screen distance
     const dy = (y - rawY) * (16 / 9);
@@ -78,7 +78,7 @@ const getCelestialArcPoint = (rawX: number, rawY: number) => {
   }
   return {
     x: Number(bestX.toFixed(2)),
-    y: Number(getCelestialArcY(bestX).toFixed(2)),
+    y: Number(getMoonArcY(bestX).toFixed(2)),
   };
 };
 
@@ -86,7 +86,7 @@ const getCelestialArcPoint = (rawX: number, rawY: number) => {
 export function CoverCard() {
   const { ref: revealRef, inView } = useReveal<HTMLDivElement>();
   const cardRef = useRef<HTMLDivElement>(null);
-  const [moonPos, setMoonPos] = useState({ x: 84.5, y: Number(getCelestialArcY(84.5).toFixed(2)) });
+  const [moonPos, setMoonPos] = useState({ x: 53.2, y: Number(getMoonArcY(53.2).toFixed(2)) });
   const [isDraggingMoon, setIsDraggingMoon] = useState(false);
   const rafRef = useRef<number | null>(null);
 
@@ -108,7 +108,7 @@ export function CoverCard() {
       const rawX = ((clientX - rect.left) / rect.width) * 100;
       const rawY = ((clientY - rect.top) / rect.height) * 100;
       // Fixed to celestial arc trajectory across the sky!
-      setMoonPos(getCelestialArcPoint(rawX, rawY));
+      setMoonPos(getMoonArcPoint(rawX, rawY));
     });
   };
 
@@ -122,17 +122,17 @@ export function CoverCard() {
   };
 
   const handleMoonKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       e.preventDefault();
       setMoonPos((prev) => {
-        const nextX = Math.max(15, prev.x - 2.5);
-        return { x: Number(nextX.toFixed(2)), y: Number(getCelestialArcY(nextX).toFixed(2)) };
+        const nextX = Math.max(50, prev.x - 2.5);
+        return { x: Number(nextX.toFixed(2)), y: Number(getMoonArcY(nextX).toFixed(2)) };
       });
-    } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+    } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
       setMoonPos((prev) => {
-        const nextX = Math.min(85, prev.x + 2.5);
-        return { x: Number(nextX.toFixed(2)), y: Number(getCelestialArcY(nextX).toFixed(2)) };
+        const nextX = Math.min(96, prev.x + 2.5);
+        return { x: Number(nextX.toFixed(2)), y: Number(getMoonArcY(nextX).toFixed(2)) };
       });
     }
   };
@@ -155,32 +155,6 @@ export function CoverCard() {
 
       <Sparkles seed={1} count={12} />
 
-      {/* Celestial Moon Orbit Arc Guide (Graceful Starry Track) */}
-      <svg
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="celestialArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#fde047" stopOpacity="0.04" />
-            <stop offset="15%" stopColor="#ecd5a3" stopOpacity={isDraggingMoon ? "0.45" : "0.22"} />
-            <stop offset="50%" stopColor="#fff5cc" stopOpacity={isDraggingMoon ? "0.65" : "0.32"} />
-            <stop offset="85%" stopColor="#ecd5a3" stopOpacity={isDraggingMoon ? "0.45" : "0.22"} />
-            <stop offset="100%" stopColor="#fde047" stopOpacity="0.04" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M 15 10.5 Q 50 -0.5 85 10.5"
-          fill="none"
-          stroke="url(#celestialArcGrad)"
-          strokeWidth="0.25"
-          strokeDasharray="0.8 1.4"
-          className="transition-opacity duration-300"
-        />
-      </svg>
-
       {/* Moonlight reflection on lake water - dynamically tracks Moon X position! */}
       <span
         style={{ left: `${moonPos.x}%` }}
@@ -188,7 +162,7 @@ export function CoverCard() {
         aria-hidden="true"
       />
 
-      {/* Layer 2: Draggable Glowing Animated Moon & Concentric Lunar Aura (Fixed to Celestial Arc) */}
+      {/* Layer 2: Draggable Glowing Animated Moon & Concentric Lunar Aura (Fixed to Arc Path - Clean, No Visual Line) */}
       <div
         onPointerDown={handleMoonPointerDown}
         onPointerMove={handleMoonPointerMove}
@@ -196,9 +170,9 @@ export function CoverCard() {
         onPointerCancel={handleMoonPointerUp}
         onKeyDown={handleMoonKeyDown}
         role="slider"
-        aria-label="Drag Moon Along Celestial Arc Across Sky"
-        aria-valuemin={15}
-        aria-valuemax={85}
+        aria-label="Drag Moon Along Sky Arc"
+        aria-valuemin={50}
+        aria-valuemax={96}
         aria-valuenow={Math.round(moonPos.x)}
         tabIndex={0}
         style={{
