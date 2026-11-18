@@ -1082,73 +1082,15 @@ body {
   will-change: filter, transform;
 }
 
-/* ================= COUPLE GLOW OUTLINE & HARDWARE ACCELERATION ================= */
-@keyframes coupleOutlineBreathe {
-  0%, 100% {
-    opacity: 0.82;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
+/* ================= COUPLE GLOW OUTLINE (Still, Constant & Radiant) ================= */
 .couple-outline-glow {
-  animation: coupleOutlineBreathe 3s ease-in-out infinite;
-  will-change: opacity;
+  opacity: 0.95;
   transform: translateZ(0);
+  filter: drop-shadow(0 0 4px rgba(255, 220, 110, 0.9)) drop-shadow(0 0 10px rgba(255, 180, 50, 0.65));
 }
 
-/* Couple Border Glow Modes (Tapped Separately) */
 .couple-mode-gold {
   filter: drop-shadow(0 0 3px rgba(255, 220, 110, 0.9)) drop-shadow(0 0 10px rgba(255, 180, 50, 0.65));
-}
-.couple-outline-gold {
-  filter: none;
-}
-
-.couple-mode-rose {
-  filter: drop-shadow(0 0 3px rgba(255, 150, 190, 0.95)) drop-shadow(0 0 12px rgba(255, 90, 150, 0.8)) drop-shadow(0 0 20px rgba(255, 40, 120, 0.45));
-}
-.couple-outline-rose {
-  filter: hue-rotate(-50deg) saturate(2.2) brightness(1.15);
-}
-
-.couple-mode-diamond {
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 1)) drop-shadow(0 0 14px rgba(240, 245, 255, 0.95)) drop-shadow(0 0 26px rgba(200, 225, 255, 0.7));
-}
-.couple-outline-diamond {
-  filter: saturate(0.2) brightness(1.6);
-}
-
-.couple-mode-sunset {
-  filter: drop-shadow(0 0 3px rgba(255, 130, 40, 0.95)) drop-shadow(0 0 12px rgba(255, 90, 20, 0.85)) drop-shadow(0 0 22px rgba(230, 60, 0, 0.55));
-}
-.couple-outline-sunset {
-  filter: hue-rotate(28deg) saturate(2.5) brightness(1.1);
-}
-
-.couple-mode-emerald {
-  filter: drop-shadow(0 0 3px rgba(100, 255, 210, 0.95)) drop-shadow(0 0 14px rgba(40, 220, 160, 0.85)) drop-shadow(0 0 24px rgba(20, 180, 130, 0.5));
-}
-.couple-outline-emerald {
-  filter: hue-rotate(95deg) saturate(2.4) brightness(1.2);
-}
-
-/* ================= LAMP / LANTERN GLOW MODES (Tapped Separately) ================= */
-.lamp-mode-candle {
-  filter: none;
-}
-
-.lamp-mode-radiant {
-  filter: drop-shadow(0 0 14px rgba(255, 220, 90, 0.9)) drop-shadow(0 0 28px rgba(255, 180, 50, 0.6));
-}
-
-.lamp-mode-sparkle {
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 230, 140, 0.85)) hue-rotate(-12deg);
-}
-
-.lamp-mode-amber {
-  filter: drop-shadow(0 0 12px rgba(255, 130, 30, 0.95)) drop-shadow(0 0 24px rgba(255, 80, 10, 0.65)) hue-rotate(25deg);
 }
 
 /* ================= CELESTIAL DRAG SLIDER ANIMATIONS ================= */

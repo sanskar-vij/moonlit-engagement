@@ -51,22 +51,6 @@ function useReveal<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-/* ---------- Glow Preset Configurations (Tapped Separately) ---------- */
-const COUPLE_GLOW_MODES = [
-  { outlineCls: "couple-outline-gold", imgCls: "couple-mode-gold" },
-  { outlineCls: "couple-outline-rose", imgCls: "couple-mode-rose" },
-  { outlineCls: "couple-outline-diamond", imgCls: "couple-mode-diamond" },
-  { outlineCls: "couple-outline-sunset", imgCls: "couple-mode-sunset" },
-  { outlineCls: "couple-outline-emerald", imgCls: "couple-mode-emerald" },
-];
-
-const LAMP_GLOW_MODES = [
-  { lampCls: "lamp-mode-candle" },
-  { lampCls: "lamp-mode-radiant" },
-  { lampCls: "lamp-mode-sparkle" },
-  { lampCls: "lamp-mode-amber" },
-];
-
 /* ---------- Card 1 · Cover (The Proposal & Front Ceremony Event) ---------- */
 export function CoverCard() {
   const { ref: revealRef, inView } = useReveal<HTMLDivElement>();
@@ -74,22 +58,6 @@ export function CoverCard() {
   const [moonPos, setMoonPos] = useState({ x: 84.5, y: 10.1 });
   const [isDraggingMoon, setIsDraggingMoon] = useState(false);
   const rafRef = useRef<number | null>(null);
-
-  // Independent Couple Border Glow Mode (Tapped separately, silently with no text/name)
-  const [coupleGlowIdx, setCoupleGlowIdx] = useState(0);
-
-  // Independent Lamp Glow Mode (Tapped separately, silently with no text/name)
-  const [lampGlowIdx, setLampGlowIdx] = useState(0);
-
-  const handleCoupleTap = (e: React.MouseEvent | React.TouchEvent) => {
-    e.stopPropagation();
-    setCoupleGlowIdx((prev) => (prev + 1) % COUPLE_GLOW_MODES.length);
-  };
-
-  const handleLampTap = (e: React.MouseEvent | React.TouchEvent) => {
-    e.stopPropagation();
-    setLampGlowIdx((prev) => (prev + 1) % LAMP_GLOW_MODES.length);
-  };
 
   const handleMoonPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -123,9 +91,6 @@ export function CoverCard() {
       setIsDraggingMoon(false);
     }
   };
-
-  const curCoupleMode = COUPLE_GLOW_MODES[coupleGlowIdx];
-  const curLampMode = LAMP_GLOW_MODES[lampGlowIdx];
 
   return (
     <article
@@ -197,7 +162,7 @@ export function CoverCard() {
       </div>
 
       {/* Layer 3: Hanging Lanterns with Animated Candle Flames & Unified Natural Canopy Sway */}
-      <div className={`canopy-sway-left pointer-events-none absolute inset-0 z-[3] transition-all duration-500 ${curLampMode.lampCls}`} aria-hidden="true">
+      <div className="canopy-sway-left pointer-events-none absolute inset-0 z-[3]" aria-hidden="true">
         {/* Lantern 1 Glow & Halo (Upper Lantern flame centroid: 15.4%, 20.5%) */}
         <span className="lantern-halo left-[15.4%] top-[20.5%] h-[12cqw] w-[12cqw] [animation-delay:0.3s]" />
         <span className="lantern-glow left-[15.4%] top-[20.5%] h-[5.5cqw] w-[4.8cqw] [animation-delay:0.3s]" />
@@ -221,42 +186,22 @@ export function CoverCard() {
         />
       </div>
 
-      {/* Dedicated Interactive Tap Target for Lamps (Separately Tapped, Silent with No Text) */}
-      <div
-        onClick={handleLampTap}
-        role="button"
-        tabIndex={0}
-        aria-label="Tap to change lamp glow effect"
-        title="Tap to change lamp glow effect"
-        className="absolute left-0 top-0 h-[42%] w-[38%] z-[25] cursor-pointer touch-manipulation group/lamp-tap active:scale-95 transition-transform duration-150"
-      />
-
-      {/* Layer 5: Proposal Silhouette Couple with Golden Border / Contour Outline Glow */}
+      {/* Layer 5: Proposal Silhouette Couple with Still Golden Border / Contour Glow */}
       <div className="pointer-events-none absolute inset-0 z-[5]" aria-hidden="true">
-        {/* Dedicated Golden Contour Glow Outline Layer (Couple Border) */}
+        {/* Dedicated Golden Contour Glow Outline Layer (Still Couple Border Glow) */}
         <img
           src={coverCoupleOutline}
           alt=""
-          className={`pointer-events-none absolute inset-0 h-full w-full object-cover couple-outline-glow opacity-95 transform-gpu transition-all duration-500 ${curCoupleMode.outlineCls}`}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover couple-outline-glow transform-gpu"
         />
 
-        {/* Silhouette Couple Image */}
+        {/* Silhouette Couple Image with Still Golden Edge Glow */}
         <img
           src={coverCouple}
           alt="Ansh proposing to Rini under the moonlit sky"
-          className={`h-full w-full object-cover transform-gpu transition-all duration-500 ${curCoupleMode.imgCls}`}
+          className="h-full w-full object-cover transform-gpu couple-mode-gold"
         />
       </div>
-
-      {/* Dedicated Interactive Tap Target for Couple Border Glow (Separately Tapped, Silent with No Text) */}
-      <div
-        onClick={handleCoupleTap}
-        role="button"
-        tabIndex={0}
-        aria-label="Tap to change couple border glow effect"
-        title="Tap to change couple border glow effect"
-        className="absolute right-0 bottom-0 h-[30%] w-[58%] z-[25] cursor-pointer touch-manipulation group/couple-tap active:scale-[0.985] transition-transform duration-150"
-      />
 
       {/* Gentle vignette for legibility */}
       <div className="pointer-events-none absolute inset-0 z-[6] bg-[radial-gradient(ellipse_at_50%_42%,rgba(6,14,38,0.55)_0%,rgba(6,14,38,0.15)_45%,transparent_70%)]" />
@@ -475,14 +420,6 @@ export function DetailsCard() {
 /* ---------- Card 3 · Closing (The Celebration & RSVP Event) ---------- */
 export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
   const { ref, inView } = useReveal<HTMLDivElement>();
-  const [lampGlowIdx, setLampGlowIdx] = useState(0);
-
-  const handleLampTap = (e: React.MouseEvent | React.TouchEvent) => {
-    e.stopPropagation();
-    setLampGlowIdx((prev) => (prev + 1) % LAMP_GLOW_MODES.length);
-  };
-
-  const curLampMode = LAMP_GLOW_MODES[lampGlowIdx];
 
   return (
     <article
@@ -506,7 +443,7 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
       />
 
       {/* Layer 2: 3 Hanging Lanterns with Synchronized Candle Flame Glows & Night Breeze Sway */}
-      <div className={`lantern-sway-right pointer-events-none absolute inset-0 z-[3] transition-all duration-500 ${curLampMode.lampCls}`} aria-hidden="true">
+      <div className="lantern-sway-right pointer-events-none absolute inset-0 z-[3]" aria-hidden="true">
         {/* Lantern 1 (left) */}
         <span className="lantern-halo left-[68.6%] top-[11.4%] h-[13cqw] w-[13cqw] [animation-delay:0.4s]" />
         <span className="lantern-glow left-[68.6%] top-[11.4%] h-[6cqw] w-[5cqw] [animation-delay:0.4s]" />
@@ -525,16 +462,6 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
-
-      {/* Interactive Tap Zone for Upper Hanging Lanterns (Silent with No Text) */}
-      <div
-        onClick={handleLampTap}
-        role="button"
-        tabIndex={0}
-        aria-label="Tap to change hanging lanterns glow effect"
-        title="Tap to change hanging lanterns glow effect"
-        className="absolute right-0 top-0 h-[38%] w-[42%] z-[25] cursor-pointer touch-manipulation group/lamp-tap-3 active:scale-95 transition-transform duration-150"
-      />
 
       {/* Layer 3: Cherry Blossom Floral Branch in Top-Left Corner with Breeze Sway */}
       <div className="flower-sway-left pointer-events-none absolute inset-0 z-[4]" aria-hidden="true">
@@ -555,7 +482,7 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
       </div>
 
       {/* Layer 5: Stone Lantern with Living Firelight Flame & Ambient Step Illumination */}
-      <div className={`pointer-events-none absolute inset-0 z-[6] transition-all duration-500 ${curLampMode.lampCls}`} aria-hidden="true">
+      <div className="pointer-events-none absolute inset-0 z-[6]" aria-hidden="true">
         <span className="stone-lantern-light left-[14.8%] top-[83.8%] h-[24cqw] w-[24cqw] rounded-full bg-gradient-to-r from-[#ffaa33]/25 via-[#ffcc55]/35 to-transparent blur-md" />
         <span className="lantern-halo left-[14.8%] top-[83.8%] h-[18cqw] w-[18cqw] [animation-delay:0.5s]" />
         <span className="stone-flame left-[14.8%] top-[83.8%] h-[8.5cqw] w-[7cqw] rounded-full bg-gradient-to-t from-[#ff8c1a] via-[#ffeaad] to-[#ffffff] blur-[2px] shadow-[0_0_15px_rgba(255,200,80,0.9)]" />
@@ -564,16 +491,6 @@ export function ClosingCard({ onRsvp }: { onRsvp: () => void }) {
         src={page3StoneLantern}
         alt=""
         className="pointer-events-none absolute inset-0 z-[7] h-full w-full object-cover"
-      />
-
-      {/* Interactive Tap Zone for Stone Lantern (Silent with No Text) */}
-      <div
-        onClick={handleLampTap}
-        role="button"
-        tabIndex={0}
-        aria-label="Tap to change stone lantern glow effect"
-        title="Tap to change stone lantern glow effect"
-        className="absolute left-0 bottom-0 h-[32%] w-[38%] z-[25] cursor-pointer touch-manipulation group/stone-lamp-tap active:scale-95 transition-transform duration-150"
       />
 
       {/* Gentle vignette for legibility */}
