@@ -51,11 +51,42 @@ function useReveal<T extends HTMLElement>() {
   return { ref, inView };
 }
 
+/* ---------- Celestial Arc Path for Draggable Moon ---------- */
+// Mathematical equation: y = 5.0 + 5.5 * ((x - 50) / 35)^2
+// Zenith (peak) at center (x = 50%, y = 5.0%), horizons at x = 15% & 85% (y = 10.5%)
+const getCelestialArcY = (x: number) => {
+  const u = (x - 50) / 35;
+  return 5.0 + 5.5 * (u * u);
+};
+
+const getCelestialArcPoint = (rawX: number, rawY: number) => {
+  const clampedX = Math.max(15, Math.min(85, rawX));
+  let bestX = clampedX;
+  let bestDist = Infinity;
+  const minSearch = Math.max(15, clampedX - 8);
+  const maxSearch = Math.min(85, clampedX + 8);
+  for (let x = minSearch; x <= maxSearch; x += 0.25) {
+    const y = getCelestialArcY(x);
+    const dx = x - rawX;
+    // 16/9 aspect ratio correction for Euclidean screen distance
+    const dy = (y - rawY) * (16 / 9);
+    const d = dx * dx + dy * dy;
+    if (d < bestDist) {
+      bestDist = d;
+      bestX = x;
+    }
+  }
+  return {
+    x: Number(bestX.toFixed(2)),
+    y: Number(getCelestialArcY(bestX).toFixed(2)),
+  };
+};
+
 /* ---------- Card 1 · Cover (The Proposal & Front Ceremony Event) ---------- */
 export function CoverCard() {
   const { ref: revealRef, inView } = useReveal<HTMLDivElement>();
   const cardRef = useRef<HTMLDivElement>(null);
-  const [moonPos, setMoonPos] = useState({ x: 84.5, y: 10.1 });
+  const [moonPos, setMoonPos] = useState({ x: 84.5, y: Number(getCelestialArcY(84.5).toFixed(2)) });
   const [isDraggingMoon, setIsDraggingMoon] = useState(false);
   const rafRef = useRef<number | null>(null);
 
@@ -76,10 +107,8 @@ export function CoverCard() {
       const rect = cardRef.current.getBoundingClientRect();
       const rawX = ((clientX - rect.left) / rect.width) * 100;
       const rawY = ((clientY - rect.top) / rect.height) * 100;
-      // Keep moon smoothly within the open night sky area
-      const clampedX = Math.max(14, Math.min(90, rawX));
-      const clampedY = Math.max(4, Math.min(38, rawY));
-      setMoonPos({ x: clampedX, y: clampedY });
+      // Fixed to celestial arc trajectory across the sky!
+      setMoonPos(getCelestialArcPoint(rawX, rawY));
     });
   };
 
@@ -89,6 +118,22 @@ export function CoverCard() {
         (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
       } catch { }
       setIsDraggingMoon(false);
+    }
+  };
+
+  const handleMoonKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+      e.preventDefault();
+      setMoonPos((prev) => {
+        const nextX = Math.max(15, prev.x - 2.5);
+        return { x: Number(nextX.toFixed(2)), y: Number(getCelestialArcY(nextX).toFixed(2)) };
+      });
+    } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setMoonPos((prev) => {
+        const nextX = Math.min(85, prev.x + 2.5);
+        return { x: Number(nextX.toFixed(2)), y: Number(getCelestialArcY(nextX).toFixed(2)) };
+      });
     }
   };
 
@@ -110,6 +155,32 @@ export function CoverCard() {
 
       <Sparkles seed={1} count={12} />
 
+      {/* Celestial Moon Orbit Arc Guide (Graceful Starry Track) */}
+      <svg
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="celestialArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#fde047" stopOpacity="0.04" />
+            <stop offset="15%" stopColor="#ecd5a3" stopOpacity={isDraggingMoon ? "0.45" : "0.22"} />
+            <stop offset="50%" stopColor="#fff5cc" stopOpacity={isDraggingMoon ? "0.65" : "0.32"} />
+            <stop offset="85%" stopColor="#ecd5a3" stopOpacity={isDraggingMoon ? "0.45" : "0.22"} />
+            <stop offset="100%" stopColor="#fde047" stopOpacity="0.04" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M 15 10.5 Q 50 -0.5 85 10.5"
+          fill="none"
+          stroke="url(#celestialArcGrad)"
+          strokeWidth="0.25"
+          strokeDasharray="0.8 1.4"
+          className="transition-opacity duration-300"
+        />
+      </svg>
+
       {/* Moonlight reflection on lake water - dynamically tracks Moon X position! */}
       <span
         style={{ left: `${moonPos.x}%` }}
@@ -117,16 +188,17 @@ export function CoverCard() {
         aria-hidden="true"
       />
 
-      {/* Layer 2: Draggable Glowing Animated Moon & Concentric Lunar Aura */}
+      {/* Layer 2: Draggable Glowing Animated Moon & Concentric Lunar Aura (Fixed to Celestial Arc) */}
       <div
         onPointerDown={handleMoonPointerDown}
         onPointerMove={handleMoonPointerMove}
         onPointerUp={handleMoonPointerUp}
         onPointerCancel={handleMoonPointerUp}
+        onKeyDown={handleMoonKeyDown}
         role="slider"
-        aria-label="Drag Moon Across Sky"
-        aria-valuemin={14}
-        aria-valuemax={90}
+        aria-label="Drag Moon Along Celestial Arc Across Sky"
+        aria-valuemin={15}
+        aria-valuemax={85}
         aria-valuenow={Math.round(moonPos.x)}
         tabIndex={0}
         style={{
@@ -154,9 +226,9 @@ export function CoverCard() {
         </div>
 
         {/* Drag Hint Tooltip */}
-        <div className="pointer-events-none absolute -bottom-[4cqw] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#fde047]/40 bg-[#071333]/85 px-[2cqw] py-[0.4cqw] opacity-0 shadow-[0_0_10px_rgba(253,224,71,0.3)] backdrop-blur-sm transition-opacity duration-300 group-hover/moon:opacity-100">
+        <div className="pointer-events-none absolute -bottom-[4cqw] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#fde047]/40 bg-[#071333]/85 px-[2.4cqw] py-[0.4cqw] opacity-0 shadow-[0_0_10px_rgba(253,224,71,0.3)] backdrop-blur-sm transition-opacity duration-300 group-hover/moon:opacity-100">
           <span className="font-serif text-[1.8cqw] font-medium tracking-wider text-[#fde047]">
-            🌕 DRAG MOON
+            🌕 DRAG ALONG SKY ARC
           </span>
         </div>
       </div>
