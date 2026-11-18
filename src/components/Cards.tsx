@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import coverBg from "../assets/cover_bg.jpg";
-import coverMoon from "../assets/cover_moon.png";
-import moonDisc from "../assets/moon_disc.png";
-import coverLanterns from "../assets/cover_lanterns.png";
-import coverFlowers from "../assets/cover_flowers.png";
-import coverCouple from "../assets/cover_couple.png";
-import coverCoupleOutline from "../assets/cover_couple_outline.png";
+import coverBg from "../assets/cover_bg.webp";
+import coverMoon from "../assets/cover_moon.webp";
+import moonDisc from "../assets/moon_disc.webp";
+import coverLanterns from "../assets/cover_lanterns.webp";
+import coverFlowers from "../assets/cover_flowers.webp";
+import coverCouple from "../assets/cover_couple.webp";
+import coverCoupleOutline from "../assets/cover_couple_outline.webp";
 
-import page2Bg from "../assets/page2_bg.jpg";
-import page2Arch from "../assets/page2_arch.png";
-import page2Stars from "../assets/page2_stars.png";
-import page2Roses from "../assets/page2_roses.png";
-import page2Boat from "../assets/page2_boat.png";
+import page2Bg from "../assets/page2_bg.webp";
+import page2Arch from "../assets/page2_arch.webp";
+import page2Stars from "../assets/page2_stars.webp";
+import page2Roses from "../assets/page2_roses.webp";
+import page2Boat from "../assets/page2_boat.webp";
 
-import page3Bg from "../assets/page3_bg.jpg";
-import page3Lanterns from "../assets/page3_lanterns.png";
-import page3Flowers from "../assets/page3_flowers.png";
-import page3Terrace from "../assets/page3_terrace.png";
-import page3StoneLantern from "../assets/page3_stone_lantern.png";
+import page3Bg from "../assets/page3_bg.webp";
+import page3Lanterns from "../assets/page3_lanterns.webp";
+import page3Flowers from "../assets/page3_flowers.webp";
+import page3Terrace from "../assets/page3_terrace.webp";
+import page3StoneLantern from "../assets/page3_stone_lantern.webp";
 
 import {
   CalendarIcon,

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent, type MouseEvent } from "react";
-import page2Bg from "../assets/page2_bg.jpg";
-import page2Stars from "../assets/page2_stars.png";
-import moonDisc from "../assets/moon_disc.png";
+import page2Bg from "../assets/page2_bg.webp";
+import page2Stars from "../assets/page2_stars.webp";
+import moonDisc from "../assets/moon_disc.webp";
 import { FlourishDivider, Heart, HeartDivider, Sparkles, StarCross } from "./Ornaments";
 
 interface EnterGateProps {
