@@ -52,11 +52,20 @@ function useReveal<T extends HTMLElement>() {
 }
 
 /* ---------- Moon Path Fixed to the Curve in User Image ---------- */
-// Exactly matches the red curve drawn by the user from top center (52.1%, 12.3%)
-// swooping down along the open night sky to the right horizon (96.0%, 40.1%)
+// Connected curve passing through original moon position (84.5%, 10.1%)
+// Left branch: curves to top center near flowers (52.0%, 12.0%)
+// Right branch: curves down along the right side to horizon (96.0%, 40.0%)
 const getMoonArcY = (x: number) => {
-  const u = x - 52.1;
-  return 12.3 + 0.0144 * (u * u);
+  const m = 0.5;
+  if (x <= 84.5) {
+    const dx = x - 84.5;
+    const a1 = (12.0 - 10.1 + m * 32.5) / (32.5 * 32.5);
+    return 10.1 + m * dx + a1 * (dx * dx);
+  } else {
+    const dx = x - 84.5;
+    const a2 = (40.0 - 10.1 - m * 11.5) / (11.5 * 11.5);
+    return 10.1 + m * dx + a2 * (dx * dx);
+  }
 };
 
 const getMoonArcPoint = (rawX: number, rawY: number) => {
@@ -86,7 +95,8 @@ const getMoonArcPoint = (rawX: number, rawY: number) => {
 export function CoverCard() {
   const { ref: revealRef, inView } = useReveal<HTMLDivElement>();
   const cardRef = useRef<HTMLDivElement>(null);
-  const [moonPos, setMoonPos] = useState({ x: 53.2, y: Number(getMoonArcY(53.2).toFixed(2)) });
+  // Keep the moon's original starting position!
+  const [moonPos, setMoonPos] = useState({ x: 84.5, y: 10.1 });
   const [isDraggingMoon, setIsDraggingMoon] = useState(false);
   const rafRef = useRef<number | null>(null);
 
@@ -179,7 +189,7 @@ export function CoverCard() {
           left: `${moonPos.x}%`,
           top: `${moonPos.y}%`,
         }}
-        className={`group/moon absolute h-[20cqw] w-[20cqw] -translate-x-1/2 -translate-y-1/2 z-[2] touch-none select-none transition-shadow ${isDraggingMoon ? "cursor-grabbing scale-105" : "cursor-grab hover:scale-105"
+        className={`group/moon absolute h-[20cqw] w-[20cqw] -translate-x-1/2 -translate-y-1/2 z-[2] touch-none select-none outline-none focus:outline-none focus:ring-0 transition-shadow ${isDraggingMoon ? "cursor-grabbing scale-105" : "cursor-grab hover:scale-105"
           }`}
       >
         {/* Concentric Lunar Aura directly aligned to back of moon (Soft & Dimmed) */}

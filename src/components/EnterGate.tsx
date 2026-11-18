@@ -236,7 +236,7 @@ export default function EnterGate({ onEnter }: EnterGateProps) {
                 transform: `translate3d(${dragOffset.x}px, ${dragOffset.y}px, 0)`,
                 transition: isDragging ? "none" : "transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1)",
               }}
-              className={`group/bigmoon relative z-20 flex h-[46cqw] w-[46cqw] touch-none select-none items-center justify-center rounded-full cursor-grab active:cursor-grabbing focus:outline-none focus:ring-4 focus:ring-[#fde047]/80 ${
+              className={`group/bigmoon relative z-20 flex h-[46cqw] w-[46cqw] touch-none select-none items-center justify-center rounded-full cursor-grab active:cursor-grabbing outline-none focus:outline-none focus:ring-0 ${
                 isDragging ? "scale-108" : "hover:scale-105"
               }`}
             >
